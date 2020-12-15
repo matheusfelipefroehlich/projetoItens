@@ -1,0 +1,16 @@
+#tipoMed{
+	text-align: left;
+	left: 0px;
+}
+
+#Data{
+	text-align: right;
+	right: 0px;
+}
+
+#logo{
+	align-items: center;
+	display: block;
+    margin-left: auto;
+    margin-right: auto
+}

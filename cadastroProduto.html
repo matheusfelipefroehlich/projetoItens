@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<HTML>
+ <HEAD>
+  <META CHARSET="UTF-8"/>
+  <script type="text/javascript" src="script.js"></script>
+  <TITLE>Cadastro Produto</TITLE>
+  <link rel="stylesheet" type="text/css" src="script.js">
+ </HEAD>
+ <BODY onload="obtemData();">
+        <label id="Data" ></label><br />
+        <label id="Hora"></label><br /> <br />
+ 	<div class="topo">
+	 	<div class="cabecalho"></div>
+	 	<CENTER><h1>CADASTRO DE ITENS</h1></CENTER>
+	 	<nav>
+	 	<ul>
+	      <li class="ativo"><a href="inicio.html">INÍCIO</a></li>
+	      <li><a href="cadastroProduto.html">CADASTRAR ITEM</a></li>
+	      <li><a href="listas.html">LISTAR ITENS</a></li>
+	    </ul> 
+	    </nav>
+	</div>
+ <article>
+ 	<section>
+		    <form>
+			 	<fieldset>
+			 		<legend>Preencha os campos abaixo</legend>
+			 		<fieldset>
+			 			<legend>Novo Item</legend>
+			 			<table>
+			 				<thead><!-- Cabeçalho da tabela -->
+			  					<tr>
+			 						<th colspan="2"></th>
+			 					</tr>
+			 				</thead>
+			 				<tbody> <!--Corpo da tabela  -->					
+			 					<tr>
+			 						<td><label for="txtNome">Nome do item:</label></td>
+			 						<td><input type="text" maxlength="50" size="37" id="txtNome" placeholder="Informe a nome do item" required="required" oninvalid="this.setCustomValidity('Entre com um nome do item')" /></td>
+			 					</tr>
+			 					<tr>
+			 						<td><label for="txtDescricao">Imagem do produto:</label></td>
+			 						<td><input type="file" id="txtImagem"  required="required" oninvalid="this.setCustomValidity('Entre com a imagem do item')" accept="image/png, image/jpeg" /></td>
+			 					</tr>	
+			 					<tr>
+			 						<td><label>Unidade de Medida:</label></td>
+			 						<td>
+			 							<select class="form-control" name="SelecioneUnidadeMedida" id="selUnMed" onchange="validaUnMed()" >
+			 								<option selected value="">Selecione um tipo...</option>			 		
+			 								<option id="1" value="Lt" >Litro</option>
+			 								<option id="2" value="Kg">Quilograma</option>
+			 								<option id="3" value="Um">Unidade</option>			 						
+			 							</select>			 						
+			 						</td>
+			 					</tr>			 					
+			 					<tr>
+			 						<td><label for="txtQuantidade" onfocus="validaUnMed()" >Informe a quantidade:</label></td>
+			 						<td><input type="text" maxlength="30" size="37" id="txtQuantidade" placeholder="Informe a quantidade" /></td>
+			 						<td><label for="txtTipoUM" id="tipoMed" style="text-align: left; width: 10px"> </label></td>
+			 					</tr>			 								 							 					
+			 					<tr>  <!--tr é nova linha --> 						
+									<td> <label for="txtValorUnit">Valor unitário: R$</label></td> 
+									<td>
+								 		<input type="text" name="valor" maxlength="50" step="0.01" min="0.00" size="37" id="txtValorUnit" onfocus="convMoeda()" onKeyPress="return(moeda(this,'.',',',event))" placeholder="Informe o valor unitário">  
+									</td> 						
+			 					</tr>
+			 					<tr>
+			 						<td><label>Tipo:</label></td>
+			 						<td>
+			 							<select class="form-control" name="SelecionePerecivel" id="selPerecivel" onchange="obrigaValidade()" >
+			 								<option selected value="">É perecível...</option>			 		
+			 								<option id="1" value="S" >Sim</option>
+			 								<option id="2" value="N">Não</option>
+			 							</select>
+			 						</td>
+			 					</tr>
+			 					<tr>  <!--tr é nova linha --> 						
+			 						<td><label for="dataValidade">Data de validade</label></td>
+			 						<td><input type="date"  id="dataValidade" onchange="validaVencimento(this.value)">
+			 							<td><label for="txtVencido" id="txtVencido" style="text-align: left; width: 10px"> </label></td>
+			 					</tr>
+			 					<tr>  <!--tr é nova linha --> 						
+			 						<td><label for="dataFabricacao">Data de fabricação</label></td>
+			 						<td><input type="date"  id="dataFabricacao" required="required" oninvalid="this.setCustomValidity('Entre com a data de fabricação do item')" max=""></td>
+			 					</tr>			 								 					
+			 					<tr>			 					
+			 				</tbody>
+			 			</table>
+			 		</fieldset>
+			 	
+			 		
+			 		<fieldset>
+			 			<!-- Rodapé do formulário -->
+			 			<input type="submit" name="btnSalva" id="btnSalva" value="Salvar" onclick="obrigaValidade()">
+			 			<input type="button" name="btnCancela" id="btnCancela" value="Cancelar">
+			 		</fieldset>		
+			 	</fieldset>
+		 	</form>
+		</section>
+ 	</article>
+ </BODY>
+
+ <script language="javascript">   
+function moeda(a, e, r, t) {
+    let n = ""
+      , h = j = 0
+      , u = tamanho2 = 0
+      , l = ajd2 = ""
+      , o = window.Event ? t.which : t.keyCode;
+    if (13 == o || 8 == o)
+        return !0;
+    if (n = String.fromCharCode(o),
+    -1 == "0123456789".indexOf(n))
+        return !1;
+    for (u = a.value.length,
+    h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
+        ;
+    for (l = ""; h < u; h++)
+        -1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
+    if (l += n,
+    0 == (u = l.length) && (a.value = ""),
+    1 == u && (a.value = "0" + r + "0" + l),
+    2 == u && (a.value = "0" + r + l),
+    u > 2) {
+        for (ajd2 = "",
+        j = 0,
+        h = u - 3; h >= 0; h--)
+            3 == j && (ajd2 += e,
+            j = 0),
+            ajd2 += l.charAt(h),
+            j++;
+        for (a.value = "",
+        tamanho2 = ajd2.length,
+        h = tamanho2 - 1; h >= 0; h--)
+            a.value += ajd2.charAt(h);
+        a.value += r + l.substr(u - 2, u)
+    }
+    return !1
+}
+ </script> 
+</HTML>
